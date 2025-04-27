@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY faulty.service /etc/systemd/system/
 COPY stress.service /etc/systemd/system/
 COPY setup.sh /setup.sh
+RUN chmod +x /setup.sh
 
 VOLUME [ "/sys/fs/cgroup" ]
 STOPSIGNAL SIGRTMIN+3

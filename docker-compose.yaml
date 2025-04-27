@@ -4,14 +4,8 @@ services:
   lab-systemd:
     build: ./lab
     # isolamento mínimo para rodar systemd sem privilegiar
-    cap_drop:
-      - ALL
-    cap_add:
-      - SYS_ADMIN        # para montar cgroups
-      - DAC_OVERRIDE     # leitura de arquivos de sistema
-    security_opt:
-      - no-new-privileges:true
-      - seccomp:unconfined
+    runtime: sysbox-runc
+
     stdin_open: true
     tty: true
 
@@ -21,15 +15,13 @@ services:
 
     volumes:
       - type: bind
-        source: /sys/fs/cgroup
-        target: /sys/fs/cgroup
-        readonly: true
-      - type: bind
         source: /etc/machine-id
         target: /etc/machine-id
-        readonly: true
+        read_only: true
 
     tmpfs:
       - /run
+      - /run/lock
       - /tmp
 
+    command: ["/sbin/init"]
