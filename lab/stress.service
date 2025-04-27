@@ -1,0 +1,12 @@
+[Unit]
+Description=Serviço de Stress para Debugging
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/stress --cpu 1 --vm 1 --vm-bytes 128M
+Restart=no
+
+[Install]
+WantedBy=multi-user.target
+

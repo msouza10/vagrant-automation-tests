@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  lab-systemd:
+    build: ./lab
+    # isolamento mínimo para rodar systemd sem privilegiar
+    cap_drop:
+      - ALL
+    cap_add:
+      - SYS_ADMIN        # para montar cgroups
+      - DAC_OVERRIDE     # leitura de arquivos de sistema
+    security_opt:
+      - no-new-privileges:true
+      - seccomp:unconfined
+    stdin_open: true
+    tty: true
+
+    mem_limit: 512M
+    memswap_limit: 512M
+    cpus: '1.0'
+
+    volumes:
+      - type: bind
+        source: /sys/fs/cgroup
+        target: /sys/fs/cgroup
+        readonly: true
+      - type: bind
+        source: /etc/machine-id
+        target: /etc/machine-id
+        readonly: true
+
+    tmpfs:
+      - /run
+      - /tmp
+
