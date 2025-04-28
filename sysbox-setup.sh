@@ -108,7 +108,7 @@ fi
 
 read -rp "To complete the installation we need to restart the machine. Do you want to restart now? [y/N] " resp_reboot
 if [[ "$resp_reboot" =~ ^[yY]$ ]]; then
-    log "[INFO] Rebooting..."
+    log "Rebooting..."
     sleep 3
     reboot
 else
