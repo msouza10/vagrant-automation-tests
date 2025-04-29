@@ -1,0 +1,8 @@
+koalephant/debian11
+generic/debian12
+generic/ubuntu2204
+roboxes/ubuntu2304
+boxen/ubuntu-24.04
+gutehall/ubuntu24-10
+gutehall/ubuntu25-04
+
